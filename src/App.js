@@ -8,19 +8,24 @@ function App() {
   ]);
   const [input, setInput] = useState("");
 
-  const addTodo = () => {
+  const addTodo = (event) => {
+    event.preventDefault();
     setToDoList([...toDoList, input]);
   };
 
   return (
     <div className="App">
-      <input
-        value={input}
-        onChange={(event) => {
-          setInput(event.target.value);
-        }}
-      />
-      <button onClick={addTodo}>Add Todo</button>
+      <form>
+        <input
+          value={input}
+          onChange={(event) => {
+            setInput(event.target.value);
+          }}
+        />
+        <button type="submit" onClick={addTodo}>
+          Add Todo
+        </button>
+      </form>
 
       <ul>
         {toDoList.map((todo) => (

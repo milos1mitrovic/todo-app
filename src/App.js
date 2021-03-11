@@ -1,18 +1,27 @@
 import { Button, FormControl, Input, InputLabel } from "@material-ui/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+import db from "./firebase";
 import ToDo from "./ToDo";
 
 function App() {
-  const [toDoList, setToDoList] = useState([
-    "Take dogs for a walk",
-    "Take the rubbish out",
-  ]);
+  const [toDoList, setToDoList] = useState([]);
   const [input, setInput] = useState("");
+
+  useEffect(() => {
+    db.collection("todos").onSnapshot((snapshot) => {
+      // console.log(snapshot.docs.map((doc) => doc.data()));
+      setToDoList(snapshot.docs.map((doc) => doc.data().todo));
+    });
+  }, []);
 
   const addTodo = (event) => {
     event.preventDefault();
-    setToDoList([...toDoList, input]);
+    db.collection("todos").add({
+      todo: input,
+    });
+
+    // setToDoList([...toDoList, input]);
     setInput("");
   };
 

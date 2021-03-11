@@ -11,6 +11,7 @@ function App() {
   const addTodo = (event) => {
     event.preventDefault();
     setToDoList([...toDoList, input]);
+    setInput("");
   };
 
   return (

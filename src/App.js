@@ -1,5 +1,6 @@
 import { Button, FormControl, Input, InputLabel } from "@material-ui/core";
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
 import { useEffect, useState } from "react";
 import "./App.css";
 import db from "./firebase";
@@ -58,7 +59,7 @@ function App() {
 
       <ul>
         {toDoList.map((todo) => (
-          <ToDo todo={todo} />
+          <ToDo key={todo.id} todo={todo} />
         ))}
       </ul>
     </div>

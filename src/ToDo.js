@@ -1,11 +1,4 @@
-import {
-  Button,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Modal,
-} from "@material-ui/core";
+import { Button, List, ListItem, ListItemText, Modal } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import React, { useState } from "react";
@@ -49,6 +42,7 @@ function Todo(props) {
       <Modal open={open} onClose={handleClose}>
         <div className={classes.paper}>
           <input
+            placeholder={props.todo.todo}
             value={input}
             onChange={(event) => setInput(event.target.value)}
             type="text"
@@ -59,7 +53,6 @@ function Todo(props) {
 
       <List>
         <ListItem>
-          <ListItemAvatar></ListItemAvatar>
           <ListItemText primary={props.todo.todo} secondary="Dummy deadline" />
         </ListItem>
         <button onClick={handleOpen}>EDIT</button>

@@ -1,4 +1,5 @@
 import { Button, FormControl, Input, InputLabel } from "@material-ui/core";
+import firebase from "firebase";
 import { useEffect, useState } from "react";
 import "./App.css";
 import db from "./firebase";
@@ -19,6 +20,7 @@ function App() {
     event.preventDefault();
     db.collection("todos").add({
       todo: input,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
 
     // setToDoList([...toDoList, input]);

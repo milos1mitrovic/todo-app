@@ -10,10 +10,14 @@ function App() {
   const [input, setInput] = useState("");
 
   useEffect(() => {
-    db.collection("todos").onSnapshot((snapshot) => {
-      // console.log(snapshot.docs.map((doc) => doc.data()));
-      setToDoList(snapshot.docs.map((doc) => doc.data().todo));
-    });
+    db.collection("todos")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        // console.log(snapshot.docs.map((doc) => doc.data()));
+        setToDoList(
+          snapshot.docs.map((doc) => ({ id: doc.id, todo: doc.data().todo }))
+        );
+      });
   }, []);
 
   const addTodo = (event) => {
@@ -54,7 +58,7 @@ function App() {
 
       <ul>
         {toDoList.map((todo) => (
-          <ToDo text={todo} />
+          <ToDo todo={todo} />
         ))}
       </ul>
     </div>
